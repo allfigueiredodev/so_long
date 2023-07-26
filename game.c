@@ -30,20 +30,20 @@ void	mlx_machine_set(t_machine *machine, char *title, int w, int h)
 	machine->title = title;
 	machine->w = w;
 	machine->h = h;
-	// machine->win = NULL;
 	// machine->display = NULL;
+	// machine->qwerty = NULL;
 }
 
 void	mlx_plugin_init(t_machine *machine)
 {
-	machine->display = mlx_init();
-	if (!machine->display)
+	machine->win = mlx_init();
+	if (!machine->win)
 	{
 		printf("mlx_plugin_init: error at mlx initialization\n");
 		return ;
 	}
-	machine->win = mlx_new_window(machine->display, machine->w, machine->h, machine->title);
-	if (!machine->win)
+	machine->display = mlx_new_window(machine->win, machine->w, machine->h, machine->title);
+	if (!machine->display)
 	{
 		printf("mlx_plugin_init: error trying to create a window\n");
 		return ;
@@ -54,7 +54,7 @@ void	mlx_plugin_img(t_machine *machine, t_img *set, char *path)
 {
 	if (!machine || !set || !path)
 		return ;
-	set->img = mlx_xpm_file_to_image(machine->display, path, &set->w, &set->h);
+	set->img = mlx_xpm_file_to_image(machine->win, path, &set->w, &set->h);
 	printf("%i %i\n", set->w, set->h);
 	if (set->img)
 	{
@@ -64,22 +64,22 @@ void	mlx_plugin_img(t_machine *machine, t_img *set, char *path)
 
 void	mlx_plugin_draw(t_machine *machine, t_img *set)
 {
-	if (!machine || !machine->display || !machine->win || !set || !set->img)
+	if (!machine || !machine->win || !machine->display || !set || !set->img)
 	{
 		printf("mlx_plugin_draw: error\n");
 		return ;
 	}
-	mlx_put_image_to_window(machine->display, machine->win, set->img, set->x, set->y);
+	mlx_put_image_to_window(machine->win, machine->display, set->img, set->x, set->y);
 }
 
 void	mlx_plugin_destroy(t_machine *machine)
 {
 	if (!machine)
 		return ;
-	if (machine->win && machine->display)
-		mlx_destroy_window(machine->display, machine->win);
-	if (machine->display)
-		mlx_destroy_display(machine->display);
+	if (machine->display && machine->win)
+		mlx_destroy_window(machine->win, machine->display);
+	if (machine->win)
+		mlx_destroy_display(machine->win);
 }
 
 int	main(void)
@@ -97,7 +97,7 @@ int	main(void)
 	mlx_plugin_init(m);
 	mlx_plugin_img(m, i, "assets/floor.xpm");
 	mlx_plugin_draw(m, i);
-	mlx_loop(m->display);
+	mlx_loop(m->win);
 	mlx_plugin_destroy(m);
 	return (0);
 }
