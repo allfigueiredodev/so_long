@@ -6,7 +6,7 @@
 /*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 16:20:39 by aperis-p          #+#    #+#             */
-/*   Updated: 2023/07/22 19:26:07 by aperis-p         ###   ########.fr       */
+/*   Updated: 2023/07/26 15:21:37 by aperis-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 #include <X11/keysym.h>
 #include <mlx.h>
 
-#define WINDOW_WIDTH 1920
-#define WINDOW_HEIGHT 1024
+#define WINDOW_WIDTH 600
+#define WINDOW_HEIGHT 300
 
 #define MLX_ERROR 1
 
@@ -26,7 +26,7 @@
 #define GREEN_PIXEL 0xFF00
 #define WHITE_PIXEL 0xFFFFFF
 #define TRANSPARENT 0x00000000
-#define FILE_PATH "./assets/AnyConv.com__TilesetFloor.xpm"
+#define FILE_PATH "./assets/floor.xpm"
 
 typedef struct s_img
 {
@@ -35,6 +35,8 @@ typedef struct s_img
 	int		bpp; /* bits per pixel */
 	int		line_len;
 	int		endian;
+	int 	width;
+	int 	height;
 }	t_img;
 
 typedef struct s_sprite
@@ -66,57 +68,57 @@ typedef struct s_rect
 	int color;
 }	t_rect;
 
-// void	img_pix_put(t_img *img, int x, int y, int color)
-// {
-// 	char    *pixel;
-// 	int		i;
+void	img_pix_put(t_img *img, int x, int y, int color)
+{
+	char    *pixel;
+	int		i;
 
-// 	i = img->bpp - 8;
-//     pixel = img->addr + (y * img->line_len + x * (img->bpp / 8));
-// 	while (i >= 0)
-// 	{
-// 		/* big endian, MSB is the leftmost bit */
-// 		if (img->endian != 0)
-// 			*pixel++ = (color >> i) & 0xFF;
-// 		/* little endian, LSB is the leftmost bit */
-// 		else
-// 			*pixel++ = (color >> (img->bpp - 8 - i)) & 0xFF;
-// 		i -= 8;
-// 	}
-// }
+	i = img->bpp - 8;
+    pixel = img->addr + (y * img->line_len + x * (img->bpp / 8));
+	while (i >= 0)
+	{
+		/* big endian, MSB is the leftmost bit */
+		if (img->endian != 0)
+			*pixel++ = (color >> i) & 0xFF;
+		/* little endian, LSB is the leftmost bit */
+		else
+			*pixel++ = (color >> (img->bpp - 8 - i)) & 0xFF;
+		i -= 8;
+	}
+}
 
-// int render_rect(t_img *img, t_rect rect)
-// {
-// 	int	i;
-// 	int j;
+int render_rect(t_img *img, t_rect rect)
+{
+	int	i;
+	int j;
 
-// 	i = rect.y;
-// 	while (i < rect.y + rect.height)
-// 	{
-// 		j = rect.x;
-// 		while (j < rect.x + rect.width)
-// 			img_pix_put(img, j++, i, rect.color);
-// 		++i;
-// 	}
-// 	return (0);
-// }
+	i = rect.y;
+	while (i < rect.y + rect.height)
+	{
+		j = rect.x;
+		while (j < rect.x + rect.width)
+			img_pix_put(img, j++, i, rect.color);
+		++i;
+	}
+	return (0);
+}
 
-// void	render_background(t_img *img, int color)
-// {
-// 	int	i;
-// 	int	j;
+void	render_background(t_img *img, int color)
+{
+	int	i;
+	int	j;
 
-// 	i = 0;
-// 	while (i < WINDOW_HEIGHT)
-// 	{
-// 		j = 0;
-// 		while (j < WINDOW_WIDTH)
-// 		{
-// 			img_pix_put(img, j++, i, color);
-// 		}
-// 		++i;
-// 	}
-// }
+	i = 0;
+	while (i < WINDOW_HEIGHT)
+	{
+		j = 0;
+		while (j < WINDOW_WIDTH)
+		{
+			img_pix_put(img, j++, i, color);
+		}
+		++i;
+	}
+}
 
 int	handle_keypress(int keysym, t_data *data)
 {
@@ -128,72 +130,72 @@ int	handle_keypress(int keysym, t_data *data)
 	return (0);
 }
 
-// int	render(t_data *data)
-// {
-// 	int i = 0;
-// 	int j = 0;
-// 	int k = -1;
-	
-// 	if (data->win_ptr == NULL)
-// 		return (1);
-// 	render_background(&data->img, WHITE_PIXEL);
-// 	while(j < WINDOW_HEIGHT)
-// 	{
-// 		k++;
-// 		i = 0;
-// 		if(k % 2 == 0)
-// 		{
-// 			while(i < WINDOW_WIDTH)
-// 			{	
-// 				if(j % 2 == 1)
-// 				{
-// 					render_rect(&data->img, (t_rect){i, j, 60, 60, GREEN_PIXEL});
-// 					i = i + 2 * (WINDOW_HEIGHT / 10);
-// 					render_rect(&data->img, (t_rect){i, j, 60, 60, WHITE_PIXEL});
-// 					i = i + 2 * (WINDOW_HEIGHT / 10);
-// 				}
-// 				else
-// 				{
-// 					render_rect(&data->img, (t_rect){i, j, 60, 60, WHITE_PIXEL});
-// 					i = i + 2 * (WINDOW_HEIGHT / 10);
-// 					render_rect(&data->img, (t_rect){i, j, 60, 60, GREEN_PIXEL});
-// 					i = i + 2 * (WINDOW_HEIGHT / 10);
-// 				}
-// 			}
-// 		}
-// 		else
-// 		{
-// 			while(i < WINDOW_WIDTH)
-// 			{
-// 				if(j % 2 == 0)
-// 				{
-// 					render_rect(&data->img, (t_rect){i, j, 60, 60, RED_PIXEL});
-// 					i = i + 2 * (WINDOW_HEIGHT / 10);
-// 					render_rect(&data->img, (t_rect){i, j, 60, 60, WHITE_PIXEL}); //converts an xpm file to a new image instance
-// 					i = i + 2 * (WINDOW_HEIGHT / 10);
-// 				}
-// 				else
-// 				{
-// 					render_rect(&data->img, (t_rect){i, j, 60, 60, WHITE_PIXEL});
-// 					i = i + 2 * (WINDOW_HEIGHT / 10);
-// 					render_rect(&data->img, (t_rect){i, j, 60, 60, RED_PIXEL});
-// 					i = i + 2 * (WINDOW_HEIGHT / 10);
-// 				}
-// 			}
-// 		}
-// 		j = j + (WINDOW_HEIGHT / 5);
-// 	}
-
-// 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, 0, 0);
-
-// 	return (0);
-// }
-
 int	render(t_data *data)
 {
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->sprites.mlx_img, 0, 0);
-	return(0);
+	int i = 0;
+	int j = 0;
+	int k = -1;
+	
+	if (data->win_ptr == NULL)
+		return (1);
+	render_background(&data->img, WHITE_PIXEL);
+	while(j < WINDOW_HEIGHT)
+	{
+		k++;
+		i = 0;
+		if(k % 2 == 0)
+		{
+			while(i < WINDOW_WIDTH)
+			{	
+				if(j % 2 == 1)
+				{
+					render_rect(&data->img, (t_rect){i, j, 60, 60, GREEN_PIXEL});
+					i = i + 2 * (WINDOW_HEIGHT / 10);
+					render_rect(&data->img, (t_rect){i, j, 60, 60, WHITE_PIXEL});
+					i = i + 2 * (WINDOW_HEIGHT / 10);
+				}
+				else
+				{
+					render_rect(&data->img, (t_rect){i, j, 60, 60, WHITE_PIXEL});
+					i = i + 2 * (WINDOW_HEIGHT / 10);
+					render_rect(&data->img, (t_rect){i, j, 60, 60, GREEN_PIXEL});
+					i = i + 2 * (WINDOW_HEIGHT / 10);
+				}
+			}
+		}
+		else
+		{
+			while(i < WINDOW_WIDTH)
+			{
+				if(j % 2 == 0)
+				{
+					render_rect(&data->img, (t_rect){i, j, 60, 60, RED_PIXEL});
+					i = i + 2 * (WINDOW_HEIGHT / 10);
+					render_rect(&data->img, (t_rect){i, j, 60, 60, WHITE_PIXEL});
+					i = i + 2 * (WINDOW_HEIGHT / 10);
+				}
+				else
+				{
+					render_rect(&data->img, (t_rect){i, j, 60, 60, WHITE_PIXEL});
+					i = i + 2 * (WINDOW_HEIGHT / 10);
+					render_rect(&data->img, (t_rect){i, j, 60, 60, RED_PIXEL});
+					i = i + 2 * (WINDOW_HEIGHT / 10);
+				}
+			}
+		}
+		j = j + (WINDOW_HEIGHT / 5);
+	}
+
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, 0, 0);
+
+	return (0);
 }
+
+// int	render(t_data *data)
+// {
+// 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->sprites.mlx_img, 0, 0);
+// 	return(0);
+// }
 
 int	main(void)
 {
@@ -212,14 +214,10 @@ int	main(void)
 
 	/* Setup hooks */ 
 	
-	data.img.mlx_img = mlx_new_image(data.mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
+	// data.img.mlx_img = mlx_new_image(data.mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
+	data.img = mlx_ptr = mlx_xpm_file_to_image(data.img.mlx_img, FILE_PATH, &data.img.width, &data.img.height);
 	
 	data.img.addr = mlx_get_data_addr(data.img.mlx_img, &data.img.bpp, &data.img.line_len, &data.img.endian);
-		
-	// sprites.relative_path = "./assets/NinjaAdventure/Backgrounds/Tilesets/TilesetFloor.png";
-	// sprites.bckgrd = mlx_xpm_file_to_image(data.mlx_ptr, sprites.relative_path, &sprites.width, &sprites.height);
-	mlx_xpm_file_to_image(data.mlx_ptr, FILE_PATH, &data.sprites.width, &data.sprites.height);
-	mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, data.sprites.mlx_img, WINDOW_WIDTH, WINDOW_HEIGHT);
 
 	mlx_loop_hook(data.mlx_ptr, &render, &data); // Hook into the loop.
 	mlx_hook(data.win_ptr, KeyPress, KeyPressMask, &handle_keypress, &data); // Hook into the keypress event.
