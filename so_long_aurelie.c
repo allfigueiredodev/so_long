@@ -6,7 +6,7 @@
 /*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 16:20:39 by aperis-p          #+#    #+#             */
-/*   Updated: 2023/07/26 15:21:37 by aperis-p         ###   ########.fr       */
+/*   Updated: 2023/07/27 22:05:49 by aperis-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,36 +26,24 @@
 #define GREEN_PIXEL 0xFF00
 #define WHITE_PIXEL 0xFFFFFF
 #define TRANSPARENT 0x00000000
-#define FILE_PATH "./assets/floor.xpm"
+#define FILE_PATH "./assets/AnyConv.com__TilesetFloor.xpm"
 
 typedef struct s_img
 {
 	void	*mlx_img;
 	char	*addr;
-	int		bpp; /* bits per pixel */
+	int		bpp; /* bits per pixel "32" */
 	int		line_len;
 	int		endian;
 	int 	width;
 	int 	height;
 }	t_img;
 
-typedef struct s_sprite
-{
-	void	*mlx_img;
-	char 	*addr;
-	int		bpp; /* bits per pixel */
-	int		line_len;
-	int		endian;
-	int		width;
-	int		height;
-}	t_sprite;
-
 typedef struct s_data
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
 	t_img	img;
-	t_sprite	sprites;
 	int		cur_img;
 }	t_data;
 
@@ -68,23 +56,31 @@ typedef struct s_rect
 	int color;
 }	t_rect;
 
+// void	img_pix_put(t_img *img, int x, int y, int color)
+// {
+// 	char    *pixel;
+// 	int		i;
+
+// 	i = img->bpp - 8;
+//     pixel = img->addr + (y * img->line_len + x * (img->bpp / 8));
+// 	while (i >= 0)
+// 	{
+// 		/* big endian, MSB is the leftmost bit */
+// 		if (img->endian != 0)
+// 			*pixel++ = (color >> i) & 0xFF;
+// 		/* little endian, LSB is the leftmost bit */
+// 		else
+// 			*pixel++ = (color >> (img->bpp - 8 - i)) & 0xFF;
+// 		i -= 8;
+// 	}
+// }
+
 void	img_pix_put(t_img *img, int x, int y, int color)
 {
-	char    *pixel;
-	int		i;
+    char    *pixel;
 
-	i = img->bpp - 8;
     pixel = img->addr + (y * img->line_len + x * (img->bpp / 8));
-	while (i >= 0)
-	{
-		/* big endian, MSB is the leftmost bit */
-		if (img->endian != 0)
-			*pixel++ = (color >> i) & 0xFF;
-		/* little endian, LSB is the leftmost bit */
-		else
-			*pixel++ = (color >> (img->bpp - 8 - i)) & 0xFF;
-		i -= 8;
-	}
+    *(int *)pixel = color;
 }
 
 int render_rect(t_img *img, t_rect rect)
@@ -215,7 +211,7 @@ int	main(void)
 	/* Setup hooks */ 
 	
 	// data.img.mlx_img = mlx_new_image(data.mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
-	data.img = mlx_ptr = mlx_xpm_file_to_image(data.img.mlx_img, FILE_PATH, &data.img.width, &data.img.height);
+	data.img.mlx_img = mlx_new_image(data.mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
 	
 	data.img.addr = mlx_get_data_addr(data.img.mlx_img, &data.img.bpp, &data.img.line_len, &data.img.endian);
 
