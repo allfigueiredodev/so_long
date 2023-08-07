@@ -1,0 +1,2 @@
+"assets/wall.xpm"
+"assets/floor.xpm"

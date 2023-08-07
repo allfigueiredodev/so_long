@@ -40,60 +40,41 @@ int on_destroy(t_wdata *wdata)
 	return (0);
 }
 
-void print_map(t_wdata wdata, t_imgdata *imgdata, int fd)
+int img_destroy(t_wdata *wdata, t_imgdata *imgdata)
 {	
-	int width = 0;
-	int height = 0;
-	char *string;
- 
-	string = get_next_line(fd);
-	while (string)
-	{
-		while(*string)
-		{
-				// mlx_put_image_to_window(wdata.init, wdata.window, imgdata->img, width, height);
-			if(*string == '1')
-				mlx_put_image_to_window(wdata.init, wdata.window, imgdata->sprites[0], width, height);
-			else if (*string == '0')
-				mlx_put_image_to_window(wdata.init, wdata.window, imgdata->sprites[1], width, height);
-			else if (*string == 'P')
-				mlx_put_image_to_window(wdata.init, wdata.window, imgdata->sprites[2], width, height);
-			else if (*string == 'E')
-				mlx_put_image_to_window(wdata.init, wdata.window, imgdata->sprites[3], width, height);
-			else if (*string == 'C')
-				mlx_put_image_to_window(wdata.init, wdata.window, imgdata->sprites[4], width, height);
-			width += 47;
-			string++;
-		}	
-		height += 47;
-		width = 0;
-		string = get_next_line(fd);
-	}
-}
+	int size;
 
+	size = sizeof(imgdata->sprites) / sizeof(imgdata->sprites[0]) - 1;
+	while(size)
+	{
+		mlx_destroy_image(wdata->init, imgdata->sprites[size]);
+		size--;
+	}
+		mlx_destroy_image(wdata->init, imgdata->sprites[size]);
+
+	return (0);
+}
 // int main(int argc, char **argv)
 int main(void)
 {
 	t_wdata wdata;
-	t_imgdata *imgdata;
+	t_imgdata imgdata;
+
 	char *sprites[5];
 	sprites[0] = "assets/wall.xpm";
 	sprites[1] = "assets/floor.xpm";
 	sprites[2] = "assets/green_ninja.xpm";
 	sprites[3] = "assets/stairs.xpm";
 	sprites[4] = "assets/scrollPlant.xpm";
+
 	int fd;
 
 	fd = open(MAP_PATH, O_RDONLY);
 	set_window_data(&wdata, "so_long", SWIDTH, SHEIGHT);
-	imgdata = malloc(sizeof(t_imgdata));
-	if(!imgdata)
-		return (0);
-	set_image_data(&wdata, imgdata, sprites);
-	print_map(wdata, imgdata, fd);
+	set_image_data(&wdata, &imgdata, sprites);
+	print_map(wdata, &imgdata, fd);
+	img_destroy(&wdata, &imgdata);
 	mlx_hook(wdata.window, KeyRelease, KeyReleaseMask, &on_keypress, &wdata);
-	// mlx_destroy_image(wdata.init, imgdata->img);
-	free(imgdata);
 	mlx_hook(wdata.window, DestroyNotify, StructureNotifyMask, &on_destroy, &wdata);
 	mlx_loop(wdata.init);
 	return (0);
