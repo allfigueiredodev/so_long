@@ -1,4 +1,4 @@
-SRC = so_long.c print_map.c get_next_line/get_next_line.c get_next_line/get_next_line_utils.c
+SRC = so_long_utils.c print_matrix.c render.c is_next_valid.c set_current.c live_map.c controller.c ft_putstr.c so_long.c print_map.c get_next_line/get_next_line.c get_next_line/get_next_line_utils.c
 FLAGS = -Wall -Werror -Wextra -g3 -lmlx -lX11 -lXext
 
 valgrind: all

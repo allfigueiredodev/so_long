@@ -1,16 +1,18 @@
 #include "so_long.h"
 
-void print_map(t_wdata wdata, t_imgdata *imgdata, int fd)
+// void print_map(t_wdata wdata, t_imgdata *imgdata, int fd, int fd2)
+char **print_map(t_wdata wdata, t_imgdata *imgdata, int fd, int fd2)
 {	
+	(void)fd2;
 	int width = 0;
 	int height = 0;
 	char *line;
 	char *line_tmp;
-	int i;
+	int rows;
  
 	line = get_next_line(fd);
 	line_tmp = line;
-	i = 0;
+	rows = 0;
 	while (line_tmp)
 	{
 		while(*line_tmp && *line_tmp != '\n')
@@ -27,12 +29,14 @@ void print_map(t_wdata wdata, t_imgdata *imgdata, int fd)
 				mlx_put_image_to_window(wdata.init, wdata.window, imgdata->sprites[4], width, height);
 			width += 47;
 			line_tmp++;
-		}	
+		}
 		height += 47;
 		width = 0;
 		if(line_tmp)
 			free(line);
 		line = get_next_line(fd);
 		line_tmp = line;
+		rows++;
 	}
+	return(live_map(rows, fd2));
 }
