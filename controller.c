@@ -9,7 +9,7 @@ void controller(int key, t_wdata *wdata)
 
 	set_current(&current_x, &current_y, livemap);
 
-	if(key == UP)
+	if(key == UP || key == WUP)
 	{
 		if(is_next_valid(UP, current_x, current_y, livemap))
 		{
@@ -20,7 +20,7 @@ void controller(int key, t_wdata *wdata)
 		else
 			return;
 	}
-	else if(key == DOWN)
+	else if(key == DOWN || key == SDOWN)
 	{
 		if(is_next_valid(DOWN, current_x, current_y, livemap))
 		{
@@ -31,7 +31,7 @@ void controller(int key, t_wdata *wdata)
 		else
 			return;
 	}
-	else if(key == LEFT)
+	else if(key == LEFT || key == ALEFT)
 	{
 		if(is_next_valid(LEFT, current_x, current_y, livemap))
 		{
@@ -42,7 +42,7 @@ void controller(int key, t_wdata *wdata)
 		else
 			return;
 	}
-	else if(key == RIGHT)
+	else if(key == RIGHT || key == DRIGHT)
 	{
 		if(is_next_valid(RIGHT, current_x, current_y, livemap))
 		{

@@ -21,15 +21,6 @@ void set_image_data(t_wdata *wdata, t_imgdata *imgdata, char **path)
 	}
 }
 
-int on_keypress(int keysym, t_wdata *wdata)
-{
-	// (void)wdata;
-	printf("Pressed key: %d\n", keysym);
-	if(keysym == UP || keysym == DOWN || keysym == LEFT || keysym == RIGHT)
-		controller(keysym, wdata);
-	return (0);
-}
-
 int img_destroy(t_wdata *wdata, t_imgdata *imgdata)
 {	
 	int size;
@@ -59,6 +50,17 @@ int on_destroy(t_wdata *wdata)
 	mlx_destroy_display(wdata->init);
 	free(wdata->init);
 	exit(0);
+	return (0);
+}
+
+int on_keypress(int keysym, t_wdata *wdata)
+{
+	printf("Pressed key: %d\n", keysym);
+	if(keysym == UP || keysym == DOWN || keysym == LEFT || keysym == RIGHT
+	|| keysym == WUP || keysym == SDOWN || keysym == ALEFT || keysym == DRIGHT)
+		controller(keysym, wdata);
+	else if(keysym == ESC)
+		on_destroy(wdata);	
 	return (0);
 }
 

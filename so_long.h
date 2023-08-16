@@ -20,8 +20,16 @@
 #define DOWN 65364
 #define LEFT 65361
 #define RIGHT 65363
+#define ESC 65307
+#define WUP 119
+#define SDOWN 115
+#define ALEFT 97
+#define DRIGHT 100
 #define FLOOR '0'
 #define PLAYER 'P'
+#define EXIT 'E'
+#define WALL '1'
+#define COL 'C'
 
 typedef struct s_livemap{
 	char 		**live_map;
