@@ -47,6 +47,12 @@ typedef struct s_imgdata{
 	t_livemap	livemap;
 }				t_imgdata;
 
+typedef struct s_game_data{
+	int coins;
+	int coins_collected;
+	int moves;
+}				t_game_data;
+
 typedef struct s_wdata{
 	void		*init; // set by set_window_data >>> mlx_init
 	void		*window; // set by window_data >>> mlx_new_window
@@ -54,13 +60,12 @@ typedef struct s_wdata{
 	int			w;  // set by set_window_data
 	int			h;	// set by set_window_data
 	t_imgdata	imgdata;
+	t_game_data game_data;
 }				t_wdata;
 
 char 	**print_map(t_wdata wdata, t_imgdata *imgdata, int fd, int fd2);
-// void 	print_map(t_wdata wdata, t_imgdata *imgdata, int fd, int fd2);
 void	ft_putstr(char *s);
 char 	**live_map(int nrows, int fd2);
-// void 	controller(int key, char **livemap);
 void 	controller(int key, t_wdata *wdata);
 void 	set_current(int *x, int *y, char **livemap);
 int 	is_next_valid(int key, int x, int y, char **livemap);
@@ -68,6 +73,5 @@ void 	render(t_wdata wdata, t_imgdata *imgdata, char **livemap);
 void 	print_matrix(char **matrix);
 char	*ft_strdup(const char *s);
 size_t	ft_strlen(const char *s);
-
 
 #endif

@@ -8,13 +8,13 @@ void controller(int key, t_wdata *wdata)
 	char **livemap = wdata->imgdata.livemap.live_map;
 
 	set_current(&current_x, &current_y, livemap);
-
 	if(key == UP || key == WUP)
 	{
 		if(is_next_valid(UP, current_x, current_y, livemap))
 		{
 			livemap[current_x][current_y] = FLOOR;
 			livemap[current_x - 1][current_y] = PLAYER;
+			wdata->game_data.moves++;
 			print_matrix(livemap);
 		}
 		else
@@ -26,6 +26,7 @@ void controller(int key, t_wdata *wdata)
 		{
 			livemap[current_x][current_y] = FLOOR;
 			livemap[current_x + 1][current_y] = PLAYER;
+			wdata->game_data.moves++;
 			print_matrix(livemap);
 		}
 		else
@@ -37,6 +38,7 @@ void controller(int key, t_wdata *wdata)
 		{
 			livemap[current_x][current_y] = FLOOR;
 			livemap[current_x][current_y - 1] = PLAYER;
+			wdata->game_data.moves++;
 			print_matrix(livemap);
 		}
 		else
@@ -48,6 +50,7 @@ void controller(int key, t_wdata *wdata)
 		{
 			livemap[current_x][current_y] = FLOOR;
 			livemap[current_x][current_y + 1] = PLAYER;
+			wdata->game_data.moves++;
 			print_matrix(livemap);
 		}
 		else

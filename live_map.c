@@ -25,4 +25,4 @@ char **live_map(int nrows, int fd2)
 	live_map[i] = NULL;
 	free(line);
 	return(live_map);
-} 
+} 	

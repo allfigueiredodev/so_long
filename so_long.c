@@ -56,6 +56,7 @@ int on_destroy(t_wdata *wdata)
 int on_keypress(int keysym, t_wdata *wdata)
 {
 	printf("Pressed key: %d\n", keysym);
+	printf("Total moves: %d\n", wdata->game_data.moves);
 	if(keysym == UP || keysym == DOWN || keysym == LEFT || keysym == RIGHT
 	|| keysym == WUP || keysym == SDOWN || keysym == ALEFT || keysym == DRIGHT)
 		controller(keysym, wdata);
@@ -68,6 +69,7 @@ int main(void)
 {
 	t_wdata wdata;
 
+	wdata.game_data.moves = 0;
 	char *sprites[5];
 	sprites[0] = "assets/wall.xpm";
 	sprites[1] = "assets/floor.xpm";

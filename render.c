@@ -1,6 +1,5 @@
 #include "so_long.h"
 
-// void render(t_wdata *wdata, char **livemap)
 void render(t_wdata wdata, t_imgdata *imgdata, char **livemap)
 {
 	int width;
