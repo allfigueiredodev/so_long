@@ -16,9 +16,7 @@ char **live_map(int nrows, int fd2)
 		live_map[i] = malloc(sizeof(char) * (ft_strlen(line) + 1));
 		if(!live_map[i])
 			return(0);
-		// live_map[i] = ft_strdup(line);
 		ft_strlcpy(live_map[i], line, ft_strlen(line) + 1);
-		// live_map[i][ft_strlen(line)] = '\0';
 		ft_putstr(live_map[i]);
 		i++;
 		free(line);

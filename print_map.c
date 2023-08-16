@@ -1,6 +1,5 @@
 #include "so_long.h"
 
-// void print_map(t_wdata wdata, t_imgdata *imgdata, int fd, int fd2)
 char **print_map(t_wdata wdata, t_imgdata *imgdata, int fd, int fd2)
 {	
 	(void)fd2;
