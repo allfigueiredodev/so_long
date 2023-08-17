@@ -1,6 +1,6 @@
 #include "so_long.h"
 
-char **print_map(t_wdata wdata, t_imgdata *imgdata, int fd, int fd2)
+char **print_map(t_wdata *wdata, t_imgdata *imgdata, int fd, int fd2)
 {	
 	(void)fd2;
 	int width = 0;
@@ -12,23 +12,24 @@ char **print_map(t_wdata wdata, t_imgdata *imgdata, int fd, int fd2)
 	line = get_next_line(fd);
 	line_tmp = line;
 	rows = 0;
-	wdata.game_data.coins = 0;
+	wdata->game_data.coins = 0;
+	wdata->game_data.coins_collected = 0;
 	while (line_tmp)
 	{
 		while(*line_tmp && *line_tmp != '\n')
 		{
 			if(*line_tmp == '1')
-				mlx_put_image_to_window(wdata.init, wdata.window, imgdata->sprites[0], width, height);
+				mlx_put_image_to_window(wdata->init, wdata->window, imgdata->sprites[0], width, height);
 			else if (*line_tmp == '0')
-				mlx_put_image_to_window(wdata.init, wdata.window, imgdata->sprites[1], width, height);
+				mlx_put_image_to_window(wdata->init, wdata->window, imgdata->sprites[1], width, height);
 			else if (*line_tmp == 'P')
-				mlx_put_image_to_window(wdata.init, wdata.window, imgdata->sprites[2], width, height);
+				mlx_put_image_to_window(wdata->init, wdata->window, imgdata->sprites[2], width, height);
 			else if (*line_tmp == 'E')
-				mlx_put_image_to_window(wdata.init, wdata.window, imgdata->sprites[3], width, height);
+				mlx_put_image_to_window(wdata->init, wdata->window, imgdata->sprites[3], width, height);
 			else if (*line_tmp == 'C')
 			{
-				mlx_put_image_to_window(wdata.init, wdata.window, imgdata->sprites[4], width, height);
-				wdata.game_data.coins++;
+				mlx_put_image_to_window(wdata->init, wdata->window, imgdata->sprites[4], width, height);
+				wdata->game_data.coins++;
 			}
 			width += 47;
 			line_tmp++;

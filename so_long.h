@@ -63,12 +63,12 @@ typedef struct s_wdata{
 	t_game_data game_data;
 }				t_wdata;
 
-char 	**print_map(t_wdata wdata, t_imgdata *imgdata, int fd, int fd2);
+char 	**print_map(t_wdata *wdata, t_imgdata *imgdata, int fd, int fd2);
 void	ft_putstr(char *s);
 char 	**live_map(int nrows, int fd2);
 void 	controller(int key, t_wdata *wdata);
 void 	set_current(int *x, int *y, char **livemap);
-int 	is_next_valid(int key, int x, int y, char **livemap);
+int 	is_next_valid(int key, int x, int y, t_wdata *wdata);
 void 	render(t_wdata wdata, t_imgdata *imgdata, char **livemap);
 void 	print_matrix(char **matrix);
 char	*ft_strdup(const char *s);
