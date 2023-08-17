@@ -17,6 +17,7 @@ void set_image_data(t_wdata *wdata, t_imgdata *imgdata, char **path)
 	while(i < 5)
 	{
 		imgdata->sprites[i] = mlx_xpm_file_to_image(wdata->init, path[i], &wdata->w, &wdata->h);
+		printf("w: %d\n h: %d\n", wdata->w, wdata->h);
 		i++;
 	}
 }
@@ -50,7 +51,6 @@ int on_destroy(t_wdata *wdata)
 	mlx_destroy_display(wdata->init);
 	free(wdata->init);
 	exit(0);
-	return (0);
 }
 
 int on_keypress(int keysym, t_wdata *wdata)

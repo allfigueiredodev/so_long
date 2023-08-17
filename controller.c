@@ -2,7 +2,6 @@
 
 void controller(int key, t_wdata *wdata)
 {
-	(void)key;
 	int current_x = 0;
 	int current_y = 0;
 	char **livemap = wdata->imgdata.livemap.live_map;
@@ -12,6 +11,8 @@ void controller(int key, t_wdata *wdata)
 	{
 		if(is_next_valid(UP, current_x, current_y, wdata))
 		{
+			if(wdata->game_data.coins_collected == wdata->game_data.coins && livemap[current_x - 1][current_y] == EXIT)
+				on_destroy(wdata);
 			livemap[current_x][current_y] = FLOOR;
 			livemap[current_x - 1][current_y] = PLAYER;
 			wdata->game_data.moves++;
@@ -24,6 +25,8 @@ void controller(int key, t_wdata *wdata)
 	{
 		if(is_next_valid(DOWN, current_x, current_y, wdata))
 		{
+			if(wdata->game_data.coins_collected == wdata->game_data.coins && livemap[current_x + 1][current_y] == EXIT)
+				on_destroy(wdata);
 			livemap[current_x][current_y] = FLOOR;
 			livemap[current_x + 1][current_y] = PLAYER;
 			wdata->game_data.moves++;
@@ -36,6 +39,8 @@ void controller(int key, t_wdata *wdata)
 	{
 		if(is_next_valid(LEFT, current_x, current_y, wdata))
 		{
+			if(wdata->game_data.coins_collected == wdata->game_data.coins && livemap[current_x][current_y - 1] == EXIT)
+				on_destroy(wdata);
 			livemap[current_x][current_y] = FLOOR;
 			livemap[current_x][current_y - 1] = PLAYER;
 			wdata->game_data.moves++;
@@ -48,6 +53,8 @@ void controller(int key, t_wdata *wdata)
 	{
 		if(is_next_valid(RIGHT, current_x, current_y, wdata))
 		{
+			if(wdata->game_data.coins_collected == wdata->game_data.coins && livemap[current_x][current_y + 1] == EXIT)
+				on_destroy(wdata);
 			livemap[current_x][current_y] = FLOOR;
 			livemap[current_x][current_y + 1] = PLAYER;
 			wdata->game_data.moves++;

@@ -73,5 +73,7 @@ void 	render(t_wdata wdata, t_imgdata *imgdata, char **livemap);
 void 	print_matrix(char **matrix);
 char	*ft_strdup(const char *s);
 size_t	ft_strlen(const char *s);
+int 	on_destroy(t_wdata *wdata);
+int 	is_next_exit(int key, int x, int y, t_wdata *wdata);
 
 #endif
