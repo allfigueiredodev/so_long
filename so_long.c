@@ -9,11 +9,13 @@ void set_window_data(t_wdata *wdata, char * title, int w, int h)
 	wdata->h = h;
 }
 
-void set_image_data(t_wdata *wdata, t_imgdata *imgdata, char **path)
+void set_image_data(t_wdata *wdata, t_imgdata *imgdata, char **path, char *filename)
 {
 	int i;
 
 	i = 0;
+	imgdata->fd = open(filename, O_RDONLY);
+	imgdata->fd2 = open(filename, O_RDONLY);
 	while(i < 5)
 	{
 		imgdata->sprites[i] = mlx_xpm_file_to_image(wdata->init, path[i], &wdata->w, &wdata->h);
@@ -50,6 +52,8 @@ int on_destroy(t_wdata *wdata)
 	mlx_destroy_window(wdata->init, wdata->window);
 	mlx_destroy_display(wdata->init);
 	free(wdata->init);
+	close(wdata->imgdata.fd);
+	close(wdata->imgdata.fd2);
 	exit(0);
 }
 
@@ -64,8 +68,15 @@ int on_keypress(int keysym, t_wdata *wdata)
 	return (0);
 }
 
-int main(void)
+int main(int argc, char **argv)
 {
+	(void)argv;
+	if(argc != 2)
+	{
+		printf("No file provided\n");
+		return(0);
+	}
+
 	t_wdata wdata;
 
 	wdata.game_data.moves = 0;
@@ -76,18 +87,12 @@ int main(void)
 	sprites[3] = "assets/stairs.xpm";
 	sprites[4] = "assets/scrollPlant.xpm";
 
-	int fd;
-	int fd2;
-
-	fd = open(MAP_PATH, O_RDONLY);
-	fd2 = open(MAP_PATH, O_RDONLY);
 	set_window_data(&wdata, "so_long", SWIDTH, SHEIGHT);
-	set_image_data(&wdata, &wdata.imgdata, sprites);
-	wdata.imgdata.livemap.live_map = print_map(&wdata, &wdata.imgdata, fd, fd2);
+	set_image_data(&wdata, &wdata.imgdata, sprites, argv[1]);
+	map_validator(wdata);
+	wdata.imgdata.livemap.live_map = print_map(&wdata, &wdata.imgdata);
 	mlx_hook(wdata.window, KeyPress, KeyPressMask, &on_keypress, &wdata);
 	mlx_hook(wdata.window, DestroyNotify, StructureNotifyMask, &on_destroy, &wdata);
 	mlx_loop(wdata.init);
-	close(fd);
-	close(fd2);
 	return (0);
 }

@@ -12,9 +12,8 @@
 #include "get_next_line/get_next_line.h"
 #include <stdint.h>
 
-#define SWIDTH 611
-#define SHEIGHT 470
-#define MAP_PATH "map.ber"
+#define SWIDTH 1280
+#define SHEIGHT 1024
 #define SPRITES "sprites_path.txt"
 #define UP 65362
 #define DOWN 65364
@@ -31,17 +30,21 @@
 #define WALL '1'
 #define COL 'C'
 
+typedef struct s_mapinfo{
+	char *filename;
+	int  columns;
+	int  rows;
+}				t_mapinfo;
+
 typedef struct s_livemap{
 	char 		**live_map;
 }				t_livemap;
 
 typedef struct s_imgdata{
-	// void	*img; //set by mlx_xpm_file_to_image
 	void		*addr; //set by mlx_get_data_addr
-	// int		bpp; //set by mlx_get_data_addr "32"
-	// int		line_size; //set by mlx_get_data_addr
-	// int		endian; //set by mlx_get_data_addr
 	void		*sprites[5];
+	int 		fd;
+	int 		fd2; 
 	int			x;
 	int			y;
 	t_livemap	livemap;
@@ -63,7 +66,7 @@ typedef struct s_wdata{
 	t_game_data game_data;
 }				t_wdata;
 
-char 	**print_map(t_wdata *wdata, t_imgdata *imgdata, int fd, int fd2);
+char 	**print_map(t_wdata *wdata, t_imgdata *imgdata);
 void	ft_putstr(char *s);
 char 	**live_map(int nrows, int fd2);
 void 	controller(int key, t_wdata *wdata);
@@ -74,6 +77,7 @@ void 	print_matrix(char **matrix);
 char	*ft_strdup(const char *s);
 size_t	ft_strlen(const char *s);
 int 	on_destroy(t_wdata *wdata);
-int 	is_next_exit(int key, int x, int y, t_wdata *wdata);
+int 	ft_count_rows(char **matrix);
+int 	has_walls(char **map);
 
 #endif

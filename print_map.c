@@ -1,15 +1,14 @@
 #include "so_long.h"
 
-char **print_map(t_wdata *wdata, t_imgdata *imgdata, int fd, int fd2)
+char **print_map(t_wdata *wdata, t_imgdata *imgdata)
 {	
-	(void)fd2;
 	int width = 0;
 	int height = 0;
 	char *line;
 	char *line_tmp;
 	int rows;
  
-	line = get_next_line(fd);
+	line = get_next_line(imgdata->fd);
 	line_tmp = line;
 	rows = 0;
 	wdata->game_data.coins = 0;
@@ -38,9 +37,9 @@ char **print_map(t_wdata *wdata, t_imgdata *imgdata, int fd, int fd2)
 		width = 0;
 		if(line_tmp)
 			free(line);
-		line = get_next_line(fd);
+		line = get_next_line(imgdata->fd);
 		line_tmp = line;
 		rows++;
 	}
-	return(live_map(rows, fd2));
+	return(live_map(rows, imgdata->fd2));
 }

@@ -19,3 +19,16 @@ char	*ft_strdup(const char *s)
 	dupped[i] = '\0';
 	return (dupped);
 }
+
+int ft_count_rows(char **matrix)
+{
+	int total;
+
+	total = 0;
+	while(*matrix)
+	{
+		total++;
+		matrix++;
+	}
+	return(total);
+}

@@ -2,7 +2,7 @@ SRC = so_long_utils.c print_matrix.c render.c is_next_valid.c set_current.c live
 FLAGS = -Wall -Werror -Wextra -g3 -lmlx -lX11 -lXext
 
 valgrind: all
-	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./a.out
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./a.out map_hard.ber
 	# valgrind --vgdb=yes --vgdb-error=0 --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./a.out
 
 all:
