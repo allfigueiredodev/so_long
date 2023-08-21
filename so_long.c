@@ -58,10 +58,12 @@ int on_destroy(t_wdata *wdata)
 
 int on_keypress(int keysym, t_wdata *wdata)
 {
-	printf("Total moves: %d\n", wdata->game_data.moves);
 	if(keysym == UP || keysym == DOWN || keysym == LEFT || keysym == RIGHT
 	|| keysym == WUP || keysym == SDOWN || keysym == ALEFT || keysym == DRIGHT)
-		controller(keysym, wdata);
+	{
+		if(controller(keysym, wdata))
+			printf("Total moves: %d\n", wdata->game_data.moves);
+	}
 	else if(keysym == ESC)
 		on_destroy(wdata);	
 	return (0);
@@ -85,15 +87,15 @@ int main(int argc, char **argv)
 	sprites[3] = "assets/stairs.xpm";
 	sprites[4] = "assets/scrollPlant.xpm";
 
-	set_window_data(&wdata, "so_long", SWIDTH, SHEIGHT);
-	set_image_data(&wdata, &wdata.imgdata, sprites, argv[1]);
 	wdata.mapinfo.map = file_to_matrix(&wdata, argv[1]);
 	if(!map_validator(&wdata, argv[1]))
 	{
+		free_matrix(&wdata);
 		printf("Invalid file, check min 2d size, format and etc...\n");
-		on_destroy(&wdata);
 		return(0);
 	}
+	set_window_data(&wdata, "so_long", wdata.mapinfo.s_width, wdata.mapinfo.s_height);
+	set_image_data(&wdata, &wdata.imgdata, sprites, argv[1]);
 	wdata.imgdata.livemap.live_map = wdata.mapinfo.map;
 	render(&wdata, wdata.imgdata.livemap.live_map);
 	mlx_hook(wdata.window, KeyPress, KeyPressMask, &on_keypress, &wdata);
@@ -103,7 +105,7 @@ int main(int argc, char **argv)
 }
 
 // to do list:
-// make the screen automatically open with the size of the current map
+// make the screen automatically open with the size of the current map - OK
 // check about the importance of flood fill
 // create functions to print errors
 // do basic animation

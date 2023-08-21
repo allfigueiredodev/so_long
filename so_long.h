@@ -12,8 +12,6 @@
 #include "get_next_line/get_next_line.h"
 #include <stdint.h>
 
-#define SWIDTH 600
-#define SHEIGHT 400
 #define SPRITES "sprites_path.txt"
 #define UP 65362
 #define DOWN 65364
@@ -33,8 +31,8 @@
 typedef struct s_mapinfo{
 	char **map;
 	char *filename;
-	int  columns;
-	int  rows;
+	int  s_width;
+	int  s_height;
 }				t_mapinfo;
 
 typedef struct s_livemap{
@@ -71,10 +69,9 @@ typedef struct s_wdata{
 char 	**print_map(t_wdata *wdata, t_imgdata *imgdata);
 void	ft_putstr(char *s);
 char 	**live_map(int nrows, int fd2);
-void 	controller(int key, t_wdata *wdata);
+int 	controller(int key, t_wdata *wdata);
 void 	set_current(int *x, int *y, char **livemap);
 int 	is_next_valid(int key, int x, int y, t_wdata *wdata);
-// void 	render(t_wdata wdata, t_imgdata *imgdata, char **livemap);
 void 	render(t_wdata *wdata, char **map);
 void 	print_matrix(char **matrix);
 size_t	ft_strlen(const char *s);
@@ -88,5 +85,6 @@ int		ft_strcmp(const char *s1, const char *s2);
 char 	**file_to_matrix(t_wdata *wdata, char *filename);
 int 	ft_count_rows_from_fd(char *filename);
 void 	set_game_data(t_wdata *wdata);
+void 	free_matrix(t_wdata *wdata);
 
 #endif

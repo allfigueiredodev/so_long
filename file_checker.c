@@ -12,14 +12,15 @@ int valid_name(char *filename)
 	return(0);
 }
 
-int has_min_size(char **map)
+int has_min_size(t_wdata *wdata, char **map)
 {
 	int x;
 	int y;
 
 	x = ft_strlen(map[0]);
-	y = ft_count_rows(map);
-
+	y = ft_count_rows(map);	
+	wdata->mapinfo.s_width = x * 47;
+	wdata->mapinfo.s_height = y * 47;
 	if ((x > 3 && y > 6) || (y > 3 && x > 6))
 		return(1);
 	else
@@ -76,7 +77,6 @@ int has_walls(char **map)
 
 int has_all_keys(t_wdata *wdata, char **map)
 {
-	(void)wdata;
 	int keys;
 	int i;
 	int j;
@@ -84,7 +84,6 @@ int has_all_keys(t_wdata *wdata, char **map)
 	keys = 0b00000;
 	i = 0;
 	j = 0;
-
 	while(map[i])
 	{
 		while(map[i][j])
@@ -93,9 +92,9 @@ int has_all_keys(t_wdata *wdata, char **map)
 				keys |= (1 << 4);
 			else if(map[i][j] == '0')
 				keys |= (1 << 3);
-			else if(map[i][j] == 'P')
+			else if(map[i][j] == 'P' && (keys & (1 << 2)) < 1)
 				keys |= (1 << 2);
-			else if(map[i][j] == 'E')
+			else if(map[i][j] == 'E' && (keys & (1 << 1)) < 1)
 				keys |= (1 << 1);
 			else if(map[i][j] == 'C')
 			{
@@ -118,7 +117,7 @@ int map_validator(t_wdata *wdata, char *filename)
 {
 	if(!valid_name(filename))
 		return(0);
-	if(!has_min_size(wdata->mapinfo.map))
+	if(!has_min_size(wdata, wdata->mapinfo.map))
 		return(0);
 	if(!is_rectangle(wdata->mapinfo.map))
 		return(0);
@@ -134,3 +133,4 @@ int map_validator(t_wdata *wdata, char *filename)
 // the map should have '1' 'walls' around the entire map - OK
 // also need a min size "3 x 5 || 5 x 3" - OK
 // the map cannot have any character besides "1,0,E,C,P" - OK
+// check if there is more than one 'P' or 'E" - OK
