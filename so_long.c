@@ -19,7 +19,6 @@ void set_image_data(t_wdata *wdata, t_imgdata *imgdata, char **path, char *filen
 	while(i < 5)
 	{
 		imgdata->sprites[i] = mlx_xpm_file_to_image(wdata->init, path[i], &wdata->w, &wdata->h);
-		printf("w: %d\n h: %d\n", wdata->w, wdata->h);
 		i++;
 	}
 }
@@ -70,16 +69,15 @@ int on_keypress(int keysym, t_wdata *wdata)
 
 int main(int argc, char **argv)
 {
-	(void)argv;
+	t_wdata wdata;
+	
 	if(argc != 2)
 	{
 		printf("No file provided\n");
 		return(0);
 	}
+	set_game_data(&wdata);
 
-	t_wdata wdata;
-
-	wdata.game_data.moves = 0;
 	char *sprites[5];
 	sprites[0] = "assets/wall.xpm";
 	sprites[1] = "assets/floor.xpm";
@@ -89,10 +87,25 @@ int main(int argc, char **argv)
 
 	set_window_data(&wdata, "so_long", SWIDTH, SHEIGHT);
 	set_image_data(&wdata, &wdata.imgdata, sprites, argv[1]);
-	map_validator(wdata);
-	wdata.imgdata.livemap.live_map = print_map(&wdata, &wdata.imgdata);
+	wdata.mapinfo.map = file_to_matrix(&wdata, argv[1]);
+	if(!map_validator(&wdata, argv[1]))
+	{
+		printf("Invalid file, check min 2d size, format and etc...\n");
+		on_destroy(&wdata);
+		return(0);
+	}
+	wdata.imgdata.livemap.live_map = wdata.mapinfo.map;
+	render(&wdata, wdata.imgdata.livemap.live_map);
 	mlx_hook(wdata.window, KeyPress, KeyPressMask, &on_keypress, &wdata);
 	mlx_hook(wdata.window, DestroyNotify, StructureNotifyMask, &on_destroy, &wdata);
 	mlx_loop(wdata.init);
 	return (0);
 }
+
+// to do list:
+// make the screen automatically open with the size of the current map
+// check about the importance of flood fill
+// create functions to print errors
+// do basic animation
+// fix GNL and libft libs
+// create makefile to compile GNL and libft all togheter

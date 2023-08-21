@@ -1,5 +1,4 @@
 #include "so_long.h"
-#include <string.h>
 
 int valid_name(char *filename)
 {
@@ -8,9 +7,23 @@ int valid_name(char *filename)
 	lenght = ft_strlen(filename);
 	if(lenght < 4)
 		return(0);
-	if((filename + (lenght - 4)) != ".ber")
+	if(!ft_strcmp((filename + (lenght - 4)), ".ber"))
+		return(1);
+	return(0);
+}
+
+int has_min_size(char **map)
+{
+	int x;
+	int y;
+
+	x = ft_strlen(map[0]);
+	y = ft_count_rows(map);
+
+	if ((x > 3 && y > 6) || (y > 3 && x > 6))
+		return(1);
+	else
 		return(0);
-	return(1);
 }
 
 int is_rectangle(char **map)
@@ -33,7 +46,7 @@ int has_walls(char **map)
 	int i;
 	int j;
 
-	lenght = strlen(map[0]);
+	lenght = ft_strlen(map[0]);
 	rows = ft_count_rows(map);
 	i = 0;
 	j = 0;
@@ -61,22 +74,9 @@ int has_walls(char **map)
 	return(1);	
 }
 
-int has_min_size(char **map)
+int has_all_keys(t_wdata *wdata, char **map)
 {
-	int x;
-	int y;
-
-	x = ft_strlen(map[0]);
-	y = ft_count_rows(map);
-
-	if ((x > 3 && y > 5) || (y > 3 && x > 5))
-		return(1);
-	else
-		return(0);
-}
-
-int has_all_keys(char **map)
-{
+	(void)wdata;
 	int keys;
 	int i;
 	int j;
@@ -98,7 +98,10 @@ int has_all_keys(char **map)
 			else if(map[i][j] == 'E')
 				keys |= (1 << 1);
 			else if(map[i][j] == 'C')
+			{
+				wdata->game_data.coins++;
 				keys |= 1;
+			}
 			else
 				return (0);
 			j++;
@@ -106,20 +109,22 @@ int has_all_keys(char **map)
 		j = 0;
 		i++;
 	}
-	if(keys == 31 )
+	if(keys == 31)
 		return(1);
 	return(0);
 }
 
-int map_validator(t_wdata wdata, char *filename)
+int map_validator(t_wdata *wdata, char *filename)
 {
-	if(!valid_name)
+	if(!valid_name(filename))
 		return(0);
-	if(!is_rectangle)
+	if(!has_min_size(wdata->mapinfo.map))
 		return(0);
-	if(!has_walls)
+	if(!is_rectangle(wdata->mapinfo.map))
 		return(0);
-	if(!has_min_size)
+	if(!has_walls(wdata->mapinfo.map))
+		return(0);
+	if(!has_all_keys(wdata, wdata->mapinfo.map))
 		return(0);
 	return(1);
 }

@@ -16,7 +16,6 @@ int is_next_valid(int key, int x, int y, t_wdata *wdata)
 		next_y = next_y - 1;
 	else if(key == RIGHT || key == DRIGHT)
 		next_y = next_y + 1;
-
 	if(wdata->imgdata.livemap.live_map[next_x][next_y] == WALL)
 		return(0);
 	if(wdata->imgdata.livemap.live_map[next_x][next_y] == COL)

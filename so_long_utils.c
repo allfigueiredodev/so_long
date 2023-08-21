@@ -1,23 +1,31 @@
 #include "so_long.h"
 
-char	*ft_strdup(const char *s)
-{
-	int		i;
-	char	*dupped;
+// size_t	ft_strlen(const char *s)
+// {
+// 	int	counter;
 
-	i = 0;
-	dupped = (char *) malloc(sizeof (char) * (ft_strlen(s) + 1));
-	if (!dupped)
+// 	counter = 0;
+// 	while (*s)
+// 	{
+// 		counter++;
+// 		s++;
+// 	}
+// 	return (counter);
+// }
+
+
+int	ft_strcmp(const char *s1, const char *s2)
+{
+	while ((*s1 != '\0' || *s2 != '\0'))
 	{
-		return (NULL);
+		while (*s1 == *s2 && *s1 && *s2)
+		{
+			s1++;
+			s2++;
+		}
+		return (*(unsigned char *)s1 - *(unsigned char *)s2);
 	}
-	while (s[i] != '\0')
-	{
-		dupped[i] = s[i];
-		i++;
-	}
-	dupped[i] = '\0';
-	return (dupped);
+	return (0);
 }
 
 int ft_count_rows(char **matrix)
@@ -32,3 +40,25 @@ int ft_count_rows(char **matrix)
 	}
 	return(total);
 }
+
+int ft_count_rows_from_fd(char *filename)
+{
+	int fd;
+	char *line;
+	int rows;
+
+    fd = open(filename, O_RDONLY);
+    line = get_next_line(fd);
+	rows = 0;
+    while(line)
+    {
+        rows++;
+        free(line);
+        line = get_next_line(fd);
+    }
+    if(line)
+        free(line);
+    close(fd);
+	return(rows);
+}
+

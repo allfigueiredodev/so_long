@@ -1,6 +1,6 @@
 #include "so_long.h"
 
-void render(t_wdata wdata, t_imgdata *imgdata, char **livemap)
+void render(t_wdata *wdata, char **map)
 {
 	int width;
 	int height;
@@ -12,20 +12,20 @@ void render(t_wdata wdata, t_imgdata *imgdata, char **livemap)
 	i = 0;
 	j = 0;
 
-	while(livemap[i])
+	while(map[i])
 	{
-		while(livemap[i][j])
+		while(map[i][j])
 		{
-			if(livemap[i][j] == '1')
-				mlx_put_image_to_window(wdata.init, wdata.window, imgdata->sprites[0], width, height);
-			else if (livemap[i][j] == '0')
-				mlx_put_image_to_window(wdata.init, wdata.window, imgdata->sprites[1], width, height);
-			else if (livemap[i][j] == 'P')
-				mlx_put_image_to_window(wdata.init, wdata.window, imgdata->sprites[2], width, height);
-			else if (livemap[i][j] == 'E')
-				mlx_put_image_to_window(wdata.init, wdata.window, imgdata->sprites[3], width, height);
-			else if (livemap[i][j] == 'C')
-				mlx_put_image_to_window(wdata.init, wdata.window, imgdata->sprites[4], width, height);
+			if(map[i][j] == '1')
+				mlx_put_image_to_window(wdata->init, wdata->window, wdata->imgdata.sprites[0], width, height);
+			else if (map[i][j] == '0')
+				mlx_put_image_to_window(wdata->init, wdata->window, wdata->imgdata.sprites[1], width, height);
+			else if (map[i][j] == 'P')
+				mlx_put_image_to_window(wdata->init, wdata->window, wdata->imgdata.sprites[2], width, height);
+			else if (map[i][j] == 'E')
+				mlx_put_image_to_window(wdata->init, wdata->window, wdata->imgdata.sprites[3], width, height);
+			else if (map[i][j] == 'C')				
+				mlx_put_image_to_window(wdata->init, wdata->window, wdata->imgdata.sprites[4], width, height);
 			width += 47;
 			j++;
 		}
