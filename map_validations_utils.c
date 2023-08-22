@@ -113,21 +113,6 @@ int has_all_keys(t_wdata *wdata, char **map)
 	return(0);
 }
 
-int map_validator(t_wdata *wdata, char *filename)
-{
-	if(!valid_name(filename))
-		return(0);
-	if(!has_min_size(wdata, wdata->mapinfo.map))
-		return(0);
-	if(!is_rectangle(wdata->mapinfo.map))
-		return(0);
-	if(!has_walls(wdata->mapinfo.map))
-		return(0);
-	if(!has_all_keys(wdata, wdata->mapinfo.map))
-		return(0);
-	return(1);
-}
-
 // file has to end with .ber - OK
 // needs to be a rectangle - OK
 // the map should have '1' 'walls' around the entire map - OK

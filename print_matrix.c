@@ -4,7 +4,7 @@ void print_matrix(char **matrix)
 {
 	while(*matrix)
 	{
-		printf("%s", *matrix);
+		printf("%s\n", *matrix);
 		matrix++;
 	}
 }

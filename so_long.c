@@ -91,7 +91,6 @@ int main(int argc, char **argv)
 	if(!map_validator(&wdata, argv[1]))
 	{
 		free_matrix(&wdata);
-		printf("Invalid file, check min 2d size, format and etc...\n");
 		return(0);
 	}
 	set_window_data(&wdata, "so_long", wdata.mapinfo.s_width, wdata.mapinfo.s_height);
@@ -106,8 +105,8 @@ int main(int argc, char **argv)
 
 // to do list:
 // make the screen automatically open with the size of the current map - OK
-// check about the importance of flood fill
-// create functions to print errors
+// check about the importance of flood fill - OK
+// create functions to print errors - OK
 // do basic animation
 // fix GNL and libft libs
 // create makefile to compile GNL and libft all togheter

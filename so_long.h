@@ -1,4 +1,3 @@
-
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
@@ -27,6 +26,12 @@
 #define EXIT 'E'
 #define WALL '1'
 #define COL 'C'
+
+typedef struct	s_point
+{
+	int			x;
+	int			y;
+}				t_point;
 
 typedef struct s_mapinfo{
 	char **map;
@@ -86,5 +91,13 @@ char 	**file_to_matrix(t_wdata *wdata, char *filename);
 int 	ft_count_rows_from_fd(char *filename);
 void 	set_game_data(t_wdata *wdata);
 void 	free_matrix(t_wdata *wdata);
+void	flood_fill(char **tab, t_point size, t_point begin);
+void	fill(char **tab, t_point size, t_point cur, char to_fill);
+int 	is_rectangle(char **map);
+int 	has_min_size(t_wdata *wdata, char **map);
+int 	is_trapped(t_wdata *wdata, char **map);
+void 	free_map_copy(char **map);
+void	*ft_calloc(size_t nmemb, size_t size);
+void 	calloc_matrix(char ***map_copy, char **map, int x, int y);
 
 #endif
