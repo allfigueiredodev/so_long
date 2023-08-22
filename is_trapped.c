@@ -15,7 +15,7 @@ int is_trapped(t_wdata *wdata, char **map)
 	i = 0;
 	j = 0;
 	map_copy = NULL;
-	calloc_matrix(&map_copy, map, size.x, size.y);
+	clone_matrix(&map_copy, map, size.x, size.y);
 	set_current(&player.x, &player.y, map_copy);
 	flood_fill(map_copy, size, player);
 	while(map_copy[i])

@@ -1,6 +1,6 @@
 #include "so_long.h"
 
-void calloc_matrix(char ***map_copy, char **map, int x, int y)
+void clone_matrix(char ***map_copy, char **map, int x, int y)
 {
 	int i;
 	int j;
