@@ -1,19 +1,5 @@
 #include "so_long.h"
 
-// size_t	ft_strlen(const char *s)
-// {
-// 	int	counter;
-
-// 	counter = 0;
-// 	while (*s)
-// 	{
-// 		counter++;
-// 		s++;
-// 	}
-// 	return (counter);
-// }
-
-
 int	ft_strcmp(const char *s1, const char *s2)
 {
 	while ((*s1 != '\0' || *s2 != '\0'))
@@ -48,6 +34,11 @@ int ft_count_rows_from_fd(char *filename)
 	int rows;
 
     fd = open(filename, O_RDONLY);
+	if(fd < 0)
+	{
+		perror("Error");
+		exit(0);
+	}
     line = get_next_line(fd);
 	rows = 0;
     while(line)

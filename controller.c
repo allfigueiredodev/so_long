@@ -76,40 +76,29 @@ int controller(int key, t_wdata *wdata)
 {
 	int current_x = 0;
 	int current_y = 0;
-	char **livemap = wdata->imgdata.livemap.live_map;
-
+	char **livemap;
+	
+	livemap = wdata->imgdata.livemap.live_map;
 	set_current(&current_x, &current_y, livemap);
 	if(key == UP || key == WUP)
 	{
-		if(move_up(UP, current_x, current_y, wdata))
-		{
-			render(wdata, livemap);
+		if(check_and_render_up(UP, current_x, current_y, wdata))
 			return(1);
-		}
 	}
 	else if(key == DOWN || key == SDOWN)
 	{
-		if(move_down(DOWN, current_x, current_y, wdata))
-		{
-			render(wdata, livemap);
+		if(check_and_render_down(DOWN, current_x, current_y, wdata))
 			return(1);
-		}
 	}
 	else if(key == LEFT || key == ALEFT)
 	{
-		if(move_left(LEFT, current_x, current_y, wdata))
-		{
-			render(wdata, livemap);
+		if(check_and_render_left(LEFT, current_x, current_y, wdata))
 			return(1);
-		}
 	}
 	else if(key == RIGHT || key == DRIGHT)
 	{
-		if(move_right(RIGHT, current_x, current_y, wdata))
-		{
-			render(wdata, livemap);
+		if(check_and_render_right(RIGHT, current_x, current_y, wdata))
 			return(1);
-		}
 	}
 	return(0);
 }

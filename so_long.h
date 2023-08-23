@@ -10,6 +10,7 @@
 #include <fcntl.h>
 #include "get_next_line/get_next_line.h"
 #include <stdint.h>
+#include <errno.h>
 
 #define UP 65362
 #define DOWN 65364
@@ -44,7 +45,7 @@ typedef struct s_livemap{
 }				t_livemap;
 
 typedef struct s_imgdata{
-	void		*addr; //set by mlx_get_data_addr
+	void		*addr;
 	void		*sprites[5];
 	int 		fd;
 	int 		fd2; 
@@ -60,11 +61,11 @@ typedef struct s_game_data{
 }				t_game_data;
 
 typedef struct s_wdata{
-	void		*init; // set by set_window_data >>> mlx_init
-	void		*window; // set by window_data >>> mlx_new_window
-	char		*title; // set by set_window_data
-	int			w;  // set by set_window_data
-	int			h;	// set by set_window_data
+	void		*init;
+	void		*window;
+	char		*title;
+	int			w;  
+	int			h;	
 	t_mapinfo	mapinfo;
 	t_imgdata	imgdata;
 	t_game_data game_data;
@@ -103,5 +104,15 @@ int		ft_count_rows(char **matrix);
 int		img_destroy(t_wdata *wdata, t_imgdata *imgdata);
 int 	on_destroy(t_wdata *wdata);
 int 	on_keypress(int keysym, t_wdata *wdata);
+int 	check_and_render_up(int direction, int cur_x, int cur_y, t_wdata *wdata);
+int 	check_and_render_down(int direction, int cur_x, int cur_y, t_wdata *wdata);
+int 	check_and_render_left(int direction, int cur_x, int cur_y, t_wdata *wdata);
+int 	check_and_render_right(int direction, int cur_x, int cur_y, t_wdata *wdata);
+int 	move_up(int direction, int cur_x, int cur_y, t_wdata *wdata);
+int 	move_down(int direction, int cur_x, int cur_y, t_wdata *wdata);
+int 	move_left(int direction, int cur_x, int cur_y, t_wdata *wdata);
+int 	move_right(int direction, int cur_x, int cur_y, t_wdata *wdata);
+
+
 
 #endif
