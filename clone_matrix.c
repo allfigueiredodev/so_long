@@ -12,7 +12,7 @@ void clone_matrix(char ***map_copy, char **map, int x, int y)
 	while(j > 0)
 	{
 		(*map_copy)[i] = ft_calloc((x + 1), sizeof(char));
-		ft_strlcpy((*map_copy)[i], map[i], x + 1);
+		gnl_strlcpy((*map_copy)[i], map[i], x + 1);
 		j--;
 		i++;
 	}

@@ -8,7 +8,7 @@
 #include <X11/keysym.h>
 #include <mlx.h>
 #include <fcntl.h>
-#include "get_next_line/get_next_line.h"
+#include "./libft/libft.h"
 #include <stdint.h>
 #include <errno.h>
 
@@ -98,8 +98,8 @@ void	*ft_calloc(size_t nmemb, size_t size);
 void 	clone_matrix(char ***map_copy, char **map, int x, int y);
 void 	set_window_data(t_wdata *wdata, char * title, int w, int h);
 void 	set_image_data(t_wdata *wdata, t_imgdata *imgdata, char *filename);
-int 	has_walls(char **map);
-int 	map_validator(t_wdata *wdata, char *filename);
+int 	has_walls(char **map, t_point w_h);
+int 	map_validator(t_wdata *wdata, t_point w_h, char *filename);
 int		ft_count_rows(char **matrix);
 int		img_destroy(t_wdata *wdata, t_imgdata *imgdata);
 int 	on_destroy(t_wdata *wdata);
@@ -112,7 +112,7 @@ int 	move_up(int direction, int cur_x, int cur_y, t_wdata *wdata);
 int 	move_down(int direction, int cur_x, int cur_y, t_wdata *wdata);
 int 	move_left(int direction, int cur_x, int cur_y, t_wdata *wdata);
 int 	move_right(int direction, int cur_x, int cur_y, t_wdata *wdata);
-
-
+char 	**get_matrix(int rows, int fd);
+int 	check_keys(int i, int j, int keys, t_wdata *wdata, char **map);
 
 #endif

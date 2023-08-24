@@ -3,7 +3,8 @@
 int main(int argc, char **argv)
 {
 	t_wdata wdata;
-	
+	t_point w_h;
+
 	if(argc != 2)
 	{
 		printf("Error\nNo file provided\n");
@@ -11,7 +12,9 @@ int main(int argc, char **argv)
 	}
 	set_game_data(&wdata);
 	wdata.mapinfo.map = file_to_matrix(&wdata, argv[1]);
-	if(!map_validator(&wdata, argv[1]))
+	w_h.x = gnl_strlen(wdata.mapinfo.map[0]);
+	w_h.y = ft_count_rows(wdata.mapinfo.map);
+	if(!map_validator(&wdata, w_h, argv[1]))
 	{
 		free_matrix(&wdata);
 		return(0);

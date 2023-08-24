@@ -6,9 +6,13 @@ int valid_name(char *filename)
 
 	lenght = ft_strlen(filename);
 	if(lenght < 4)
+	{
+		printf("Error\nWrong file extension\n");
 		return(0);
+	}
 	if(!ft_strcmp((filename + (lenght - 4)), ".ber"))
 		return(1);
+	printf("Error\nWrong file extension\n");
 	return(0);
 }
 
@@ -24,33 +28,43 @@ int has_min_size(t_wdata *wdata, char **map)
 	if ((x > 3 && y > 6) || (y > 3 && x > 6))
 		return(1);
 	else
+	{
+		printf("Error\nMap doesn't have the minimum size\n");
 		return(0);
+	}
 }
 
 int is_rectangle(char **map)
 {
 	int x;
 	int y;
+	int i;
 
-	x = ft_strlen(map[0]);
+	x = (int)ft_strlen(map[0]);
 	y = ft_count_rows(map);
-
+	i = 1;
+	while(map[i])
+	{
+		if((int)ft_strlen(map[i]) != x)
+		{
+			printf("Error\nMap is not in a rectangle shape\n");
+			return(0);
+		}
+		i++;
+	}
 	if (x == y)
+	{
+		printf("Error\nMap is not in a rectangle shape\n");
 		return(0);
+	}
 	return(1);
 }
 
-int has_walls(char **map)
+int has_walls(char **map, t_point w_h)
 {
-	int lenght;
-	int rows;
 	int i;
-	int j;
 
-	lenght = ft_strlen(map[0]);
-	rows = ft_count_rows(map);
 	i = 0;
-	j = 0;
 	while(map[0][i])
 	{
 		if(map[0][i] != '1')
@@ -58,59 +72,21 @@ int has_walls(char **map)
 		i++;
 	}
 	i = 0;
-	while(map[rows - 1][i])
+	while(map[w_h.y - 1][i])
 	{
-		if(map[rows - 1][i] != '1')
+		if(map[w_h.y - 1][i] != '1')
 			return(0);
 		i++;
 	}
 	i = 1;
-	while(i < rows)
+	while(i < w_h.y)
 	{
-		if(map[i][j] == '1' && map[i][lenght - 1] == '1')
+		if(map[i][0] == '1' && map[i][w_h.x - 1] == '1')
 			i++;
 		else
 			return(0);
 	}
 	return(1);	
-}
-
-int has_all_keys(t_wdata *wdata, char **map)
-{
-	int keys;
-	int i;
-	int j;
-	
-	keys = 0b00000;
-	i = 0;
-	j = 0;
-	while(map[i])
-	{
-		while(map[i][j])
-		{
-			if(map[i][j] == '1')
-				keys |= (1 << 4);
-			else if(map[i][j] == '0')
-				keys |= (1 << 3);
-			else if(map[i][j] == 'P' && (keys & (1 << 2)) < 1)
-				keys |= (1 << 2);
-			else if(map[i][j] == 'E' && (keys & (1 << 1)) < 1)
-				keys |= (1 << 1);
-			else if(map[i][j] == 'C')
-			{
-				wdata->game_data.coins++;
-				keys |= 1;
-			}
-			else
-				return (0);
-			j++;
-		}
-		j = 0;
-		i++;
-	}
-	if(keys == 31)
-		return(1);
-	return(0);
 }
 
 // file has to end with .ber - OK
