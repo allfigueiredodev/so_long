@@ -1,38 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_current.c                                      :+:      :+:    :+:   */
+/*   set_screen_size.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/24 13:56:47 by aperis-p          #+#    #+#             */
-/*   Updated: 2023/08/24 14:26:43 by aperis-p         ###   ########.fr       */
+/*   Created: 2023/08/24 16:17:44 by aperis-p          #+#    #+#             */
+/*   Updated: 2023/08/24 16:20:52 by aperis-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	set_current(int *x, int *y, char **livemap)
+void	set_screen_size(t_point *w_h, t_wdata wdata)
 {
-	int	i;
-	int	j;
-
-	*x = 0;
-	*y = 0;
-	i = *y;
-	j = *x;
-	while (livemap[i][j] && livemap[i][j != 'P'])
-	{
-		while (livemap[i][j] && livemap[i][j] != 'P')
-			j++;
-		if (livemap[i][j] != 'P')
-		{
-			i++;
-			j = 0;
-		}
-		else
-			break ;
-	}
-	*x = j;
-	*y = i;
+	w_h->x = gnl_strlen(wdata.mapinfo.map[0]);
+	w_h->y = ft_count_rows(wdata.mapinfo.map);
 }

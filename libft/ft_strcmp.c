@@ -1,38 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_current.c                                      :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/24 13:56:47 by aperis-p          #+#    #+#             */
-/*   Updated: 2023/08/24 14:26:43 by aperis-p         ###   ########.fr       */
+/*   Created: 2023/08/24 15:42:56 by aperis-p          #+#    #+#             */
+/*   Updated: 2023/08/24 15:43:03 by aperis-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
-
-void	set_current(int *x, int *y, char **livemap)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	int	i;
-	int	j;
-
-	*x = 0;
-	*y = 0;
-	i = *y;
-	j = *x;
-	while (livemap[i][j] && livemap[i][j != 'P'])
+	while ((*s1 != '\0' || *s2 != '\0'))
 	{
-		while (livemap[i][j] && livemap[i][j] != 'P')
-			j++;
-		if (livemap[i][j] != 'P')
+		while (*s1 == *s2 && *s1 && *s2)
 		{
-			i++;
-			j = 0;
+			s1++;
+			s2++;
 		}
-		else
-			break ;
+		return (*(unsigned char *)s1 - *(unsigned char *)s2);
 	}
-	*x = j;
-	*y = i;
+	return (0);
 }

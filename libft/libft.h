@@ -6,7 +6,7 @@
 /*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:42:16 by aperis-p          #+#    #+#             */
-/*   Updated: 2023/08/23 16:14:49 by aperis-p         ###   ########.fr       */
+/*   Updated: 2023/08/24 15:42:08 by aperis-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,5 @@ int		ftprintf_putstr(char *str);
 int		ftprintf_putchar(char c);
 int		hash_printer(unsigned long n, int base);
 int		ft_printf(const char *info, ...);
+int		ft_strcmp(const char *s1, const char *s2);
 #endif

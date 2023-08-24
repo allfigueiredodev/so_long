@@ -1,38 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_current.c                                      :+:      :+:    :+:   */
+/*   check_flowage.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/24 13:56:47 by aperis-p          #+#    #+#             */
-/*   Updated: 2023/08/24 14:26:43 by aperis-p         ###   ########.fr       */
+/*   Created: 2023/08/24 14:51:29 by aperis-p          #+#    #+#             */
+/*   Updated: 2023/08/24 14:59:32 by aperis-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	set_current(int *x, int *y, char **livemap)
+int	check_flowage(char **map_copy)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 
-	*x = 0;
-	*y = 0;
-	i = *y;
-	j = *x;
-	while (livemap[i][j] && livemap[i][j != 'P'])
+	i = 0;
+	j = 0;
+	while (map_copy[i])
 	{
-		while (livemap[i][j] && livemap[i][j] != 'P')
-			j++;
-		if (livemap[i][j] != 'P')
+		while (map_copy[i][j])
 		{
-			i++;
-			j = 0;
+			if (map_copy[i][j] == 'E' || map_copy[i][j] == 'C')
+			{
+				free_map_copy(map_copy);
+				return (0);
+			}
+			j++;
 		}
-		else
-			break ;
+		j = 0;
+		i++;
 	}
-	*x = j;
-	*y = i;
+	return (1);
 }

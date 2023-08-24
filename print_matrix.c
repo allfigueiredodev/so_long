@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print_matrix.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/24 13:53:03 by aperis-p          #+#    #+#             */
+/*   Updated: 2023/08/24 13:53:41 by aperis-p         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
-void print_matrix(char **matrix)
+void	print_matrix(char **matrix)
 {
-	while(*matrix)
+	while (*matrix)
 	{
 		ft_printf("%s\n", *matrix);
 		matrix++;

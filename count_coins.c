@@ -1,38 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_current.c                                      :+:      :+:    :+:   */
+/*   count_coins.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/24 13:56:47 by aperis-p          #+#    #+#             */
-/*   Updated: 2023/08/24 14:26:43 by aperis-p         ###   ########.fr       */
+/*   Created: 2023/08/24 15:25:53 by aperis-p          #+#    #+#             */
+/*   Updated: 2023/08/24 15:32:58 by aperis-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	set_current(int *x, int *y, char **livemap)
+void	count_coins(t_wdata *wdata, char **map)
 {
 	int	i;
 	int	j;
 
-	*x = 0;
-	*y = 0;
-	i = *y;
-	j = *x;
-	while (livemap[i][j] && livemap[i][j != 'P'])
+	i = 0;
+	j = 0;
+	while (map[i])
 	{
-		while (livemap[i][j] && livemap[i][j] != 'P')
-			j++;
-		if (livemap[i][j] != 'P')
+		while (map[i][j])
 		{
-			i++;
-			j = 0;
+			if (map[i][j] == 'C')
+				wdata->game_data.coins++;
+			j++;
 		}
-		else
-			break ;
+		j = 0;
+		i++;
 	}
-	*x = j;
-	*y = i;
 }
