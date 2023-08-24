@@ -6,7 +6,7 @@
 /*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 13:42:46 by aperis-p          #+#    #+#             */
-/*   Updated: 2023/08/24 13:46:28 by aperis-p         ###   ########.fr       */
+/*   Updated: 2023/08/24 18:44:03 by aperis-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,21 +79,21 @@ int	has_walls(char **map, t_point w_h)
 	i = 0;
 	while (map[0][i])
 	{
-		if (map[0][i] != '1')
+		if (map[0][i] == '#')
 			return (0);
 		i++;
 	}
 	i = 0;
 	while (map[w_h.y - 1][i])
 	{
-		if (map[w_h.y - 1][i] != '1')
+		if (map[w_h.y - 1][i] == '#')
 			return (0);
 		i++;
 	}
 	i = 1;
 	while (i < w_h.y)
 	{
-		if (map[i][0] == '1' && map[i][w_h.x - 1] == '1')
+		if (map[i][0] != '#' && map[i][w_h.x - 1] != '#')
 			i++;
 		else
 			return (0);
