@@ -15,7 +15,7 @@ get_next_line.c get_next_line_utils.c ft_printf_utils.c ft_printf.c
 OBJS = $(SRC:.c=.o)
 
 .c.o:
-	$(CC) $(FLAGS) -c $< -o $(<:.c=.o) -I ./libft.h
+	$(CC) $(FLAGS) -c $< -o $(<:.c=.o) -I ./
 
 $(NAME): $(OBJS)
 	$(AR) $(NAME) $(OBJS)

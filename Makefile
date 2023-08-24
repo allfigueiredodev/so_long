@@ -1,4 +1,4 @@
-NAME = so_long
+NAME = so_long.a
 LIBFT_PATH = ./libft
 LIBFT_MAKE = $(MAKE) -C $(LIBFT_PATH)
 LIBFT_LIB = $(LIBFT_PATH)/libft.a
@@ -24,7 +24,7 @@ $(NAME): $(LIBFT_LIB) $(OBJS)
 	$(CC) $(FLAGS) -o $(NAME) $(OBJS) -I ./ -Llibft -lft -lmlx -lX11 -lXext
 
 .c.o:
-	$(CC) $(FLAGS) -c $< -o $(<:.c=.o) -I ./so_long.h
+	$(CC) $(FLAGS) -c $< -o $(<:.c=.o) -I ./
 
 clean:
 	rm -rf $(OBJS)

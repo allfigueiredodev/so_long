@@ -2,8 +2,8 @@
 
 void set_current(int *x, int *y, char **livemap)
 {
-	int i = *x;
-	int j = *y;
+	int i = *y;
+	int j = *x;
 
 	while(livemap[i][j] && livemap[i][j != 'P'])
 	{
@@ -17,6 +17,6 @@ void set_current(int *x, int *y, char **livemap)
 		else
 			break;
 	}
-	*x = i;
-	*y = j;
+	*x = j;
+	*y = i;
 }

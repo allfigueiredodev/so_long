@@ -6,7 +6,7 @@ int on_keypress(int keysym, t_wdata *wdata)
 	|| keysym == WUP || keysym == SDOWN || keysym == ALEFT || keysym == DRIGHT)
 	{
 		if(controller(keysym, wdata))
-			printf("Total moves: %d\n", wdata->game_data.moves);
+			ft_printf("Total moves: %d\n", wdata->game_data.moves);
 	}
 	else if(keysym == ESC)
 		on_destroy(wdata);	

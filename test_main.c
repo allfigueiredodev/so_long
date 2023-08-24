@@ -12,6 +12,6 @@ int main(void)
 	test_temp = test;
 	print_matrix(test);
 	flood_fill(test_temp, size, start);
-	printf("\n");
+	ft_printf("\n");
 	print_matrix(test_temp);
 }

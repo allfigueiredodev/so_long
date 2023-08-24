@@ -7,12 +7,12 @@ int valid_name(char *filename)
 	lenght = ft_strlen(filename);
 	if(lenght < 4)
 	{
-		printf("Error\nWrong file extension\n");
+		ft_printf("Error\nWrong file extension\n");
 		return(0);
 	}
 	if(!ft_strcmp((filename + (lenght - 4)), ".ber"))
 		return(1);
-	printf("Error\nWrong file extension\n");
+	ft_printf("Error\nWrong file extension\n");
 	return(0);
 }
 
@@ -29,7 +29,7 @@ int has_min_size(t_wdata *wdata, char **map)
 		return(1);
 	else
 	{
-		printf("Error\nMap doesn't have the minimum size\n");
+		ft_printf("Error\nMap doesn't have the minimum size\n");
 		return(0);
 	}
 }
@@ -47,14 +47,14 @@ int is_rectangle(char **map)
 	{
 		if((int)ft_strlen(map[i]) != x)
 		{
-			printf("Error\nMap is not in a rectangle shape\n");
+			ft_printf("Error\nMap is not in a rectangle shape\n");
 			return(0);
 		}
 		i++;
 	}
 	if (x == y)
 	{
-		printf("Error\nMap is not in a rectangle shape\n");
+		ft_printf("Error\nMap is not in a rectangle shape\n");
 		return(0);
 	}
 	return(1);

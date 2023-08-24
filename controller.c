@@ -7,10 +7,10 @@ int move_up(int direction, int cur_x, int cur_y, t_wdata *wdata)
 	livemap = wdata->imgdata.livemap.live_map;
 	if(is_next_valid(direction, cur_x, cur_y, wdata))
 	{
-		if(wdata->game_data.coins_collected == wdata->game_data.coins && livemap[cur_x - 1][cur_y] == EXIT)
+		if(wdata->game_data.coins_collected == wdata->game_data.coins && livemap[cur_y - 1][cur_x] == EXIT)
 			on_destroy(wdata);
-		livemap[cur_x][cur_y] = FLOOR;
-		livemap[cur_x - 1][cur_y] = PLAYER;
+		livemap[cur_y][cur_x] = FLOOR;
+		livemap[cur_y - 1][cur_x] = PLAYER;
 		wdata->game_data.moves++;
 		return(1);
 	}
@@ -25,10 +25,10 @@ int move_down(int direction, int cur_x, int cur_y, t_wdata *wdata)
 	livemap = wdata->imgdata.livemap.live_map;
 	if(is_next_valid(direction, cur_x, cur_y, wdata))
 	{
-		if(wdata->game_data.coins_collected == wdata->game_data.coins && livemap[cur_x + 1][cur_y] == EXIT)
+		if(wdata->game_data.coins_collected == wdata->game_data.coins && livemap[cur_y + 1][cur_x] == EXIT)
 			on_destroy(wdata);
-		livemap[cur_x][cur_y] = FLOOR;
-		livemap[cur_x + 1][cur_y] = PLAYER;
+		livemap[cur_y][cur_x] = FLOOR;
+		livemap[cur_y + 1][cur_x] = PLAYER;
 		wdata->game_data.moves++;
 		return(1);
 	}
@@ -43,10 +43,10 @@ int move_left(int direction, int cur_x, int cur_y, t_wdata *wdata)
 	livemap = wdata->imgdata.livemap.live_map;
 	if(is_next_valid(direction, cur_x, cur_y, wdata))
 	{
-		if(wdata->game_data.coins_collected == wdata->game_data.coins && livemap[cur_x][cur_y - 1] == EXIT)
+		if(wdata->game_data.coins_collected == wdata->game_data.coins && livemap[cur_y][cur_x - 1] == EXIT)
 			on_destroy(wdata);
-		livemap[cur_x][cur_y] = FLOOR;
-		livemap[cur_x][cur_y - 1] = PLAYER;
+		livemap[cur_y][cur_x] = FLOOR;
+		livemap[cur_y][cur_x - 1] = PLAYER;
 		wdata->game_data.moves++;
 		return(1);
 	}
@@ -61,10 +61,10 @@ int move_right(int direction, int cur_x, int cur_y, t_wdata *wdata)
 	livemap = wdata->imgdata.livemap.live_map;
 	if(is_next_valid(direction, cur_x, cur_y, wdata))
 	{
-		if(wdata->game_data.coins_collected == wdata->game_data.coins && livemap[cur_x][cur_y + 1] == EXIT)
+		if(wdata->game_data.coins_collected == wdata->game_data.coins && livemap[cur_y][cur_x + 1] == EXIT)
 			on_destroy(wdata);
-		livemap[cur_x][cur_y] = FLOOR;
-		livemap[cur_x][cur_y + 1] = PLAYER;
+		livemap[cur_y][cur_x] = FLOOR;
+		livemap[cur_y][cur_x + 1] = PLAYER;
 		wdata->game_data.moves++;
 		return(1);
 	}

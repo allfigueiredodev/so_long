@@ -10,17 +10,17 @@ int map_validator(t_wdata *wdata, t_point w_h, char *filename)
 		return(0);
 	if(!has_walls(wdata->mapinfo.map, w_h))
 	{
-		printf("Error\nMap has holes on the wall!\n");
+		ft_printf("Error\nMap has holes on the wall!\n");
 		return(0);
 	}
 	if(!has_all_keys(wdata, wdata->mapinfo.map))
 	{
-		printf("Error\nLacking keys, or more than one 'E' or 'P' \n");
+		ft_printf("Error\nLacking keys, or more than one 'E' or 'P' \n");
 		return(0);
 	}
 	if(!is_trapped(wdata, wdata->mapinfo.map))
 	{
-		printf("Error\nPlayer is trapped due to, exit or collectables being inaccessible\n");
+		ft_printf("Error\nPlayer is trapped due to, exit or collectables being inaccessible\n");
 		return(0);
 	}
 	return(1);

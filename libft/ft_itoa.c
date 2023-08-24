@@ -34,10 +34,8 @@ static int	n_counter(int n)
 static char	*ft_hard_return(int n)
 {
 	char	*str;
-	int		i;
 
 	str = NULL;
-	i = 0;
 	if (n == 0)
 	{
 		str = (char *)malloc(2 * sizeof(char));

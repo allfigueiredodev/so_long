@@ -67,6 +67,8 @@ void	fill(char **tab, t_point size, t_point cur, char to_fill)
 
 void	flood_fill(char **tab, t_point size, t_point start)
 {
+	ft_printf("size.y: %d\n size.x: %d\n", size.y, size.x);
+	ft_printf("start.y: %d\n start.x: %d\n", start.y, start.x);
 	fill(tab, size, start, tab[start.y][start.x]);
 }
 
