@@ -36,3 +36,28 @@ void	set_current(int *x, int *y, char **livemap)
 	*x = j;
 	*y = i;
 }
+
+void	get_first_c(int *x, int *y, char **livemap)
+{
+	int	i;
+	int	j;
+
+	*x = 0;
+	*y = 0;
+	i = *y;
+	j = *x;
+	while (livemap[i][j] && livemap[i][j != 'C'])
+	{
+		while (livemap[i][j] && livemap[i][j] != 'C')
+			j++;
+		if (livemap[i][j] != 'C')
+		{
+			i++;
+			j = 0;
+		}
+		else
+			break ;
+	}
+	*x = j;
+	*y = i;
+}

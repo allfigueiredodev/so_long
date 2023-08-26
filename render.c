@@ -55,4 +55,5 @@ void	render(t_wdata *wdata, char **map)
 		i++;
 		j = 0;
 	}
+	moves_on_display(wdata);
 }

@@ -129,5 +129,15 @@ int		check_keys(int i, int j, int keys, char **map);
 int		check_flowage(char **map_copy);
 void	count_coins(t_wdata *wdata, char **map);
 void	set_screen_size(t_point *w_h, t_wdata wdata);
+void	get_first_c(int *x, int *y, char **livemap);
+int 	check_fill_p(char **map_copy, t_point size);
+int 	check_fill_c(char **map_copy, t_point size);
+void	fill_from_p(char **map, t_point size, t_point cur, char to_fill);
+void	fill_from_c(char **map, t_point size, t_point cur, char to_fill);
+int		check_flowage_p(char **map_copy);
+int		check_flowage_c(char **map_copy);
+void	flood_fill_p(char **map, t_point size, t_point start);
+void	flood_fill_c(char **map, t_point size, t_point start);
+void 	moves_on_display(t_wdata *wdata);
 
 #endif
