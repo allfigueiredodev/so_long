@@ -6,7 +6,7 @@
 /*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:06:21 by aperis-p          #+#    #+#             */
-/*   Updated: 2023/08/24 16:24:07 by aperis-p         ###   ########.fr       */
+/*   Updated: 2023/08/26 13:00:26 by aperis-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,14 +130,14 @@ int		check_flowage(char **map_copy);
 void	count_coins(t_wdata *wdata, char **map);
 void	set_screen_size(t_point *w_h, t_wdata wdata);
 void	get_first_c(int *x, int *y, char **livemap);
-int 	check_fill_p(char **map_copy, t_point size);
-int 	check_fill_c(char **map_copy, t_point size);
+int		check_fill_p(char **map_copy, t_point size);
+int		check_fill_c(char **map_copy, t_point size);
 void	fill_from_p(char **map, t_point size, t_point cur, char to_fill);
 void	fill_from_c(char **map, t_point size, t_point cur, char to_fill);
 int		check_flowage_p(char **map_copy);
 int		check_flowage_c(char **map_copy);
 void	flood_fill_p(char **map, t_point size, t_point start);
 void	flood_fill_c(char **map, t_point size, t_point start);
-void 	moves_on_display(t_wdata *wdata);
+void	moves_on_display(t_wdata *wdata);
 
 #endif

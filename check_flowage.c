@@ -6,7 +6,7 @@
 /*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:51:29 by aperis-p          #+#    #+#             */
-/*   Updated: 2023/08/24 14:59:32 by aperis-p         ###   ########.fr       */
+/*   Updated: 2023/08/26 13:09:05 by aperis-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	check_flowage_p(char **map_copy)
 	return (1);
 }
 
-int check_fill_c(char **map_copy, t_point size)
+int	check_fill_c(char **map_copy, t_point size)
 {
 	if (!has_walls(map_copy, size))
 	{
@@ -73,10 +73,10 @@ int check_fill_c(char **map_copy, t_point size)
 		ft_printf("Error\nPlayer is trapped\n");
 		return (0);
 	}
-	return(1);
+	return (1);
 }
 
-int check_fill_p(char **map_copy, t_point size)
+int	check_fill_p(char **map_copy, t_point size)
 {
 	if (!has_walls(map_copy, size))
 	{
@@ -89,5 +89,5 @@ int check_fill_p(char **map_copy, t_point size)
 		ft_printf("Error\nPlayer is trapped\n");
 		return (0);
 	}
-	return(1);
+	return (1);
 }
