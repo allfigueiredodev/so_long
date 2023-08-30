@@ -6,7 +6,7 @@
 /*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 13:42:46 by aperis-p          #+#    #+#             */
-/*   Updated: 2023/08/24 18:44:03 by aperis-p         ###   ########.fr       */
+/*   Updated: 2023/08/27 11:08:16 by aperis-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	has_min_size(t_wdata *wdata, char **map)
 	y = ft_count_rows(map);
 	wdata->mapinfo.s_width = x * 47;
 	wdata->mapinfo.s_height = y * 47;
-	if ((x > 3 && y > 6) || (y > 3 && x > 6))
+	if ((x >= 3 && y >= 5) || (y >= 3 && x >= 5))
 		return (1);
 	else
 	{

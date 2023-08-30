@@ -7,7 +7,7 @@ TEST_MAP = ./maps/map.ber
 CC = cc
 FLAGS = -Wall -Werror -Wextra -g3
 SRC = check_keys.c check_and_render.c on_keypress.c destroy_and_close.c \
-set_data.c clone_matrix.c free_map_copy.c print_matrix.c is_trapped.c \
+set_data.c clone_matrix.c free_map_copy.c is_trapped.c \
 free_matrix.c file_to_matrix.c map_validations.c map_validations_utils.c \
 so_long_utils.c render.c is_next_valid.c set_current.c controller.c ft_putstr.c \
 so_long.c check_flowage.c count_coins.c set_screen_size.c flood_fill.c \

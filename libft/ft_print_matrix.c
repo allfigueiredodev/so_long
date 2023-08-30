@@ -6,13 +6,13 @@
 /*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 13:53:03 by aperis-p          #+#    #+#             */
-/*   Updated: 2023/08/24 13:53:41 by aperis-p         ###   ########.fr       */
+/*   Updated: 2023/08/27 19:00:54 by aperis-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "libft.h"
 
-void	print_matrix(char **matrix)
+void	ft_print_matrix(char **matrix)
 {
 	while (*matrix)
 	{

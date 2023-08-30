@@ -6,7 +6,7 @@
 /*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 13:56:47 by aperis-p          #+#    #+#             */
-/*   Updated: 2023/08/24 14:26:43 by aperis-p         ###   ########.fr       */
+/*   Updated: 2023/08/27 19:20:49 by aperis-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,31 +26,6 @@ void	set_current(int *x, int *y, char **livemap)
 		while (livemap[i][j] && livemap[i][j] != 'P')
 			j++;
 		if (livemap[i][j] != 'P')
-		{
-			i++;
-			j = 0;
-		}
-		else
-			break ;
-	}
-	*x = j;
-	*y = i;
-}
-
-void	get_first_c(int *x, int *y, char **livemap)
-{
-	int	i;
-	int	j;
-
-	*x = 0;
-	*y = 0;
-	i = *y;
-	j = *x;
-	while (livemap[i][j] && livemap[i][j != 'C'])
-	{
-		while (livemap[i][j] && livemap[i][j] != 'C')
-			j++;
-		if (livemap[i][j] != 'C')
 		{
 			i++;
 			j = 0;

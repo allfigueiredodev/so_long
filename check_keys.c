@@ -19,8 +19,6 @@ int	check_keys(int i, int j, int keys, char **map)
 		while (map[i][j])
 		{
 			if (map[i][j] == '1')
-				keys |= (1 << 4);
-			else if (map[i][j] == '0')
 				keys |= (1 << 3);
 			else if (map[i][j] == 'P' && (keys & (1 << 2)) < 1)
 				keys |= (1 << 2);
@@ -28,7 +26,7 @@ int	check_keys(int i, int j, int keys, char **map)
 				keys |= (1 << 1);
 			else if (map[i][j] == 'C')
 				keys |= 1;
-			else
+			else if (map[i][j] != '0')
 				return (0);
 			j++;
 		}
@@ -44,11 +42,11 @@ int	has_all_keys(char **map)
 	int	i;
 	int	j;
 
-	keys = 0b00000;
+	keys = 0b0000;
 	i = 0;
 	j = 0;
 	keys = check_keys(i, j, keys, map);
-	if (keys == 31)
+	if (keys == 15)
 		return (1);
 	return (0);
 }
